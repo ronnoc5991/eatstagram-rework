@@ -25,6 +25,19 @@ export const getAndSetRecipes = async (
   setStateFunction(newRecipes);
 };
 
+export const getAndSetRecipe = async (
+  id: string,
+  setStateFunction: (recipe: Recipe) => void,
+): Promise<void> => {
+  const database = firebase.firestore();
+  const documentReference = database.collection('recipes').doc(id);
+  documentReference.get().then((document) => {
+    if (document.exists) {
+      setStateFunction({ ...(document.data() as Recipe), id: document.id });
+    }
+  });
+};
+
 // Update
 export const updateRecipe = (recipe: Recipe): void => {
   const database = firebase.firestore();
