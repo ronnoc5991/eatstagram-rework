@@ -9,13 +9,14 @@ export type InputProps = {
   value?: string;
   autoComplete?: 'on' | 'off';
   label?: string;
+  disabled?: boolean;
   hasSubmitButton?: boolean;
   onClick?: () => void;
   onSubmit?: () => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-// When the user hits the submit button for the array types,
+// TODO: When the user hits the submit button for the array types,
 // focus should be auto returned to the input element that they
 // are currently working on instead of having to refocus everytime
 
@@ -25,6 +26,7 @@ export default function Input({
   value,
   autoComplete,
   label,
+  disabled,
   hasSubmitButton,
   onClick,
   onSubmit,
@@ -38,6 +40,7 @@ export default function Input({
         id={name}
         name={name}
         value={value}
+        disabled={disabled}
         autoComplete={autoComplete || 'off'}
         onClick={onClick}
         onChange={onChange}
