@@ -22,6 +22,7 @@
     "cross-env": "^7.0.3",
     "cypress": "^4.12.1",
     "eslint": "^7.21.0",
+    "firebase": "^8.6.1",
     "framer-motion": "^2.9.4",
     "husky": "^4.3.0",
     "isntnt": "^1.4.1",
