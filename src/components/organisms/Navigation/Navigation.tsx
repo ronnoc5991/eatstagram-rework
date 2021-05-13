@@ -19,8 +19,8 @@ export default observer(function Navigation(): JSX.Element {
           </StyledNavItem>
         </li>
         <li>
-          <StyledNavItem to="/update">
-            <Heading type="h1">Update</Heading>
+          <StyledNavItem to="/recipes">
+            <Heading type="h1">Recipes</Heading>
           </StyledNavItem>
         </li>
       </ul>
