@@ -4,7 +4,7 @@ import Heading from '../../atoms/Heading';
 import { useGlobalStore } from '../../../GlobalStore';
 
 export default observer(function Navigation(): JSX.Element {
-  const store = useGlobalStore();
+  // const store = useGlobalStore();
   return (
     <StyledNav>
       <ul>
@@ -14,12 +14,17 @@ export default observer(function Navigation(): JSX.Element {
           </StyledNavItem>
         </li>
         <li>
-          <StyledNavItem to="/animation">
-            <Heading type="h1">Animation</Heading>
+          <StyledNavItem to="/create">
+            <Heading type="h1">Create</Heading>
+          </StyledNavItem>
+        </li>
+        <li>
+          <StyledNavItem to="/update">
+            <Heading type="h1">Update</Heading>
           </StyledNavItem>
         </li>
       </ul>
-      <span>counter: {store.count}</span>
+      {/* <span>counter: {store.count}</span> */}
     </StyledNav>
   );
 });
