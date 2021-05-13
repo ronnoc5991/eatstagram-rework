@@ -14,7 +14,7 @@ type FormProps = {
 export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>('');
   const [duration, setDuration] = useState<number>();
   const [currentIngredient, setCurrentIngredient] = useState<string>('');
   const [ingredients, setIngredients] = useState<Array<string>>([]);
@@ -24,11 +24,17 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
   const [tags, setTags] = useState<Array<string>>([]);
   const [id, setId] = useState<string>('');
 
+  const formIsComplete = (): boolean => {
+    return (
+      !!title && !!description && !!imageUrl && !!duration && !!ingredients && !!steps && !!tags
+    );
+  };
+
   const handleSubmit = () => {
     onSubmit({
       title,
       description,
-      image,
+      imageUrl,
       duration,
       ingredients,
       steps,
@@ -39,11 +45,11 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
 
   useEffect(() => {
     if (recipe) {
-      setTitle(recipe.title);
-      setDescription(recipe.description);
-      setImage(recipe.image);
-      setIngredients(recipe.ingredients);
-      setSteps(recipe.steps);
+      if (recipe.title) setTitle(recipe.title);
+      if (recipe.description) setDescription(recipe.description);
+      if (recipe.imageUrl) setImageUrl(recipe.imageUrl);
+      if (recipe.ingredients) setIngredients(recipe.ingredients);
+      if (recipe.steps) setSteps(recipe.steps);
       if (recipe.duration) setDuration(recipe.duration);
       if (recipe.tags) setTags(recipe.tags);
       if (recipe.id) setId(recipe.id);
@@ -124,7 +130,7 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
           setCurrentTag(event.currentTarget.value)
         }
       />
-      <Input type="button" value="Submit" onClick={handleSubmit} />
+      <Input type="button" value="Submit" disabled={!formIsComplete()} onClick={handleSubmit} />
     </StyledForm>
   );
 }
