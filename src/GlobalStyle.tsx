@@ -23,6 +23,13 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 62.5%;
+    box-sizing: border-box;
+  }
+
+  * {
+    box-sizing: border-box;
+    --default-border-radius: 0.5rem;
   }
 `;
 
