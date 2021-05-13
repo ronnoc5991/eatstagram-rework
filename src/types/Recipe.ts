@@ -1,7 +1,10 @@
 export type Recipe = {
   title: string;
   description: string;
-  image: string;
+  imageUrl: string;
+  name: string;
+  profilePicUrl: string;
+  storageUri: string;
   duration?: number;
   ingredients: Array<string>;
   steps: Array<string>;
