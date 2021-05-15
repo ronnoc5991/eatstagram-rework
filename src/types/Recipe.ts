@@ -4,6 +4,7 @@ export type Recipe = {
   imageUrl: string;
   name: string;
   profilePicUrl: string;
+  timestamp: string;
   storageUri: string;
   duration?: number;
   ingredients: Array<string>;
