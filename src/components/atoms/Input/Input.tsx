@@ -1,7 +1,7 @@
 import type { ChangeEvent } from 'react';
 import { InputLabel, StyledInput } from './Input.styles';
 
-type InputType = 'text' | 'number' | 'button';
+type InputType = 'text' | 'number' | 'button' | 'file';
 
 export type InputProps = {
   type: InputType;
