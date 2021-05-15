@@ -1,8 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import { ChangeEvent, useEffect, useState } from 'react';
+import firebase from 'firebase';
 import { StyledForm } from './Form.styles';
 import Input from '../../atoms/Input/Input';
 import type { Recipe } from '../../../types/Recipe';
+import ImageCropper from '../../organisms/ImageCropper/ImageCropper';
 
 type FormProps = {
   recipe?: Recipe;
@@ -24,6 +26,10 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
   const [tags, setTags] = useState<Array<string>>([]);
   const [id, setId] = useState<string>('');
 
+  const name = 'fake name';
+  const profilePicUrl = 'fake url';
+  const storageUri = 'fakestorageuri';
+
   const formIsComplete = (): boolean => {
     return (
       !!title && !!description && !!imageUrl && !!duration && !!ingredients && !!steps && !!tags
@@ -32,6 +38,9 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
 
   const handleSubmit = () => {
     onSubmit({
+      name,
+      profilePicUrl,
+      storageUri,
       title,
       description,
       imageUrl,
@@ -40,6 +49,7 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
       steps,
       tags,
       id,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp() as unknown as string,
     });
   };
 
@@ -55,6 +65,10 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
       if (recipe.id) setId(recipe.id);
     }
   }, [recipe]);
+
+  useEffect(() => {
+    console.log(imageUrl);
+  }, [imageUrl]);
 
   return (
     <StyledForm>
@@ -130,6 +144,7 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
           setCurrentTag(event.currentTarget.value)
         }
       />
+      <ImageCropper setCroppedImageUrl={setImageUrl} />
       <Input type="button" value="Submit" disabled={!formIsComplete()} onClick={handleSubmit} />
     </StyledForm>
   );

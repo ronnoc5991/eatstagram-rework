@@ -5,7 +5,7 @@ import type { Recipe } from '../../types/Recipe';
 export default function Create(): JSX.Element {
   const onSubmit = (recipe: Recipe) => {
     // createRecipe(recipe);
-    console.log(recipe);
+    console.log({ ...recipe, imageUrl: 'LOADING IMAGE URL' });
   };
 
   return (

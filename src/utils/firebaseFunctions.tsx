@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import firebase from '../firebase';
 import type { Recipe } from '../types/Recipe';
 
 // CRUD functions for recipes
 
-export const uploadImageToFirebase = (messageRef, userId: string, file: File) => {
+export const uploadImageToFirebase = (
+  messageRef: any,
+  userId: string,
+  file: File,
+): Promise<void> => {
   const filePath = `${userId}/${messageRef.id}/${file.name}`;
   return firebase
     .storage()

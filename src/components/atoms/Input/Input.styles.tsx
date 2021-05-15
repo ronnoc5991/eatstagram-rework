@@ -11,7 +11,11 @@ export const InputLabel = styled.label`
   cursor: pointer;
 `;
 
-export const StyledInput = styled.input`
+type InputProps = {
+  hidden: boolean;
+}
+
+export const StyledInput = styled.input<InputProps>`
   &[type='text'] {
     all: unset;
     border: 1px solid green;
@@ -21,6 +25,6 @@ export const StyledInput = styled.input`
     box-sizing: border-box;
     background-color: rgb(237, 237, 237);
     border-radius: var(--default-border-radius);
-    display: inline-block;
+    display: ${(props) => (props.hidden ? 'none' : 'inline-block')};
   }
 `;

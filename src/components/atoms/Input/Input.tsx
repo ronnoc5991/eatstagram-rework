@@ -1,4 +1,4 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, ForwardedRef } from 'react';
 import { InputLabel, StyledInput } from './Input.styles';
 
 type InputType = 'text' | 'number' | 'button' | 'file';
@@ -11,6 +11,9 @@ export type InputProps = {
   label?: string;
   disabled?: boolean;
   hasSubmitButton?: boolean;
+  accept?: string;
+  hidden?: boolean;
+  forwardRef?: ForwardedRef<HTMLInputElement>;
   onClick?: () => void;
   onSubmit?: () => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -28,6 +31,9 @@ export default function Input({
   label,
   disabled,
   hasSubmitButton,
+  accept,
+  forwardRef,
+  hidden = false,
   onClick,
   onSubmit,
   onChange,
@@ -44,6 +50,9 @@ export default function Input({
         autoComplete={autoComplete || 'off'}
         onClick={onClick}
         onChange={onChange}
+        accept={accept}
+        ref={forwardRef}
+        hidden={hidden}
       />
       {hasSubmitButton && <Input type="button" onClick={onSubmit} value={`Add ${name}`} />}
     </InputLabel>
