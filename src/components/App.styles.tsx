@@ -6,4 +6,5 @@ export const StyledMainContent = styled.main`
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;
 `;

@@ -12,6 +12,7 @@ export type ParagraphWeight = keyof typeof weightConfig;
 
 // casting the object as `CSSObject` for correctness and auto-completion
 const sizeConfig = {
+  xsmall: { fontSize: 12, lineHeight: 16 / 12 } as CSSObject,
   small: { fontSize: 14, lineHeight: 20 / 14 } as CSSObject,
   medium: { fontSize: 18, lineHeight: 22 / 18 } as CSSObject,
 } as const;

@@ -3,7 +3,7 @@ import Home from './Home';
 import Create from './Create';
 import Update from './Update';
 import Recipes from './Recipes';
-import RecipeViewer from './RecipeViewer';
+import RecipeViewer from './RecipeViewer/RecipeViewer';
 
 export default function Routes(): JSX.Element {
   return (

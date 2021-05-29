@@ -1,5 +1,7 @@
-import type { ChangeEvent, ForwardedRef } from 'react';
-import { InputLabel, StyledInput } from './Input.styles';
+/* eslint-disable react/no-array-index-key */
+import { ChangeEvent, ForwardedRef, useRef } from 'react';
+import { InputLabel, StyledInput, SubmitButton, List, ListItem } from './Input.styles';
+import Paragraph from '../Paragraph/Paragraph';
 
 type InputType = 'text' | 'number' | 'button' | 'file';
 
@@ -11,6 +13,7 @@ export type InputProps = {
   label?: string;
   disabled?: boolean;
   hasSubmitButton?: boolean;
+  list?: { listItems: Array<string>; isOrdered: boolean };
   accept?: string;
   hidden?: boolean;
   forwardRef?: ForwardedRef<HTMLInputElement>;
@@ -18,10 +21,6 @@ export type InputProps = {
   onSubmit?: () => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
-
-// TODO: When the user hits the submit button for the array types,
-// focus should be auto returned to the input element that they
-// are currently working on instead of having to refocus everytime
 
 export default function Input({
   type,
@@ -31,6 +30,7 @@ export default function Input({
   label,
   disabled,
   hasSubmitButton,
+  list,
   accept,
   forwardRef,
   hidden = false,
@@ -38,9 +38,27 @@ export default function Input({
   onSubmit,
   onChange,
 }: InputProps): JSX.Element {
+  const inputRef = useRef(document.createElement('input'));
+
+  const handleSubmit = () => {
+    if (inputRef && inputRef.current) inputRef.current.focus();
+    if (onSubmit) onSubmit();
+  };
+
   return (
     <InputLabel htmlFor={name}>
-      {label}
+      <Paragraph size="small">{label}</Paragraph>
+      {list && (
+        <List>
+          {list.listItems.map((listItem, index) => {
+            return (
+              <ListItem isOrdered={list.isOrdered} key={index}>
+                <Paragraph size="xsmall">{listItem}</Paragraph>
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
       <StyledInput
         type={type}
         id={name}
@@ -51,10 +69,12 @@ export default function Input({
         onClick={onClick}
         onChange={onChange}
         accept={accept}
-        ref={forwardRef}
+        ref={forwardRef || inputRef}
         hidden={hidden}
       />
-      {hasSubmitButton && <Input type="button" onClick={onSubmit} value={`Add ${name}`} />}
+      {hasSubmitButton && (
+        <SubmitButton type="button" onClick={handleSubmit} value={`Add ${name}`} />
+      )}
     </InputLabel>
   );
 }

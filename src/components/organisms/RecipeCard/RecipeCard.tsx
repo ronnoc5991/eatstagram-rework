@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import {
   StyledRecipeCard,
   ImageContainer,
@@ -31,7 +32,11 @@ export default function RecipeCard({
       {tags && (
         <ParagraphContainer>
           {tags.map((tag, index) => {
-            return index === tags.length - 1 ? tag : `${tag}, `;
+            return (
+              <Paragraph size="xsmall" key={index}>
+                {index === tags.length - 1 ? tag : `${tag}, `}
+              </Paragraph>
+            );
           })}
         </ParagraphContainer>
       )}

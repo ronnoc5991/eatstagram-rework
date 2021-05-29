@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 export const StyledRecipeCard = styled(Link)`
   all: unset;
   color: #000;
-  display: block;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   margin: 5rem 1rem;
-  border: 1px solid black;
   border-radius: 1rem;
   box-sizing: border-box;
   max-width: 30rem;
+  border: 1px solid black;
 `;
 
 export const ImageContainer = styled.div`

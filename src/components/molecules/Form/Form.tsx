@@ -66,17 +66,13 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
     }
   }, [recipe]);
 
-  useEffect(() => {
-    console.log(imageUrl);
-  }, [imageUrl]);
-
   return (
     <StyledForm>
       <Input
         type="text"
         name="title"
         autoComplete="off"
-        label="Title"
+        label="What's it called?"
         value={title}
         onChange={(event: ChangeEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)}
       />
@@ -84,7 +80,7 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
         type="text"
         name="description"
         autoComplete="off"
-        label="Description"
+        label="Describe it!"
         value={description}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setDescription(event.currentTarget.value)
@@ -94,7 +90,7 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
         type="number"
         name="duration"
         autoComplete="off"
-        label="Duration"
+        label="How long does it take to make?"
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setDuration(parseInt(event.currentTarget.value, 10))
         }
@@ -103,12 +99,15 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
         type="text"
         name="ingredient"
         autoComplete="off"
-        label="Ingredients"
+        label="What are the ingredients?"
         value={currentIngredient}
+        list={{ listItems: ingredients, isOrdered: false }}
         hasSubmitButton
         onSubmit={() => {
-          setIngredients([...ingredients, currentIngredient]);
-          setCurrentIngredient('');
+          if (currentIngredient) {
+            setIngredients([...ingredients, currentIngredient]);
+            setCurrentIngredient('');
+          }
         }}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setCurrentIngredient(event.currentTarget.value)
@@ -118,12 +117,15 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
         type="text"
         name="step"
         autoComplete="off"
-        label="Steps"
+        label="How do you make it?"
         value={currentStep}
+        list={{ listItems: steps, isOrdered: true }}
         hasSubmitButton
         onSubmit={() => {
-          setSteps([...steps, currentStep]);
-          setCurrentStep('');
+          if (currentStep) {
+            setSteps([...steps, currentStep]);
+            setCurrentStep('');
+          }
         }}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setCurrentStep(event.currentTarget.value)
@@ -133,12 +135,15 @@ export default function Form({ recipe, onSubmit }: FormProps): JSX.Element {
         type="text"
         name="tag"
         autoComplete="off"
-        label="Tags"
+        label="Add some tags! (ie: Italian)"
         value={currentTag}
+        list={{ listItems: tags, isOrdered: false }}
         hasSubmitButton
         onSubmit={() => {
-          setTags([...tags, currentTag]);
-          setCurrentTag('');
+          if (currentTag) {
+            setTags([...tags, currentTag]);
+            setCurrentTag('');
+          }
         }}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setCurrentTag(event.currentTarget.value)
