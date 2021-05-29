@@ -39,3 +39,36 @@ export const menuLine = {
     },
   }),
 };
+
+export const menuWrapper = {
+  hidden: {
+    width: 0,
+    height: 0,
+    transition: {
+      duration: 0.7,
+    },
+  },
+  shown: {
+    width: '150vh',
+    height: '150vh',
+    transition: {
+      duration: 0.7,
+    },
+  },
+};
+
+export const fadeInOut = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      duration: 0.4,
+    },
+  },
+  shown: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      delay: 0.4,
+    },
+  },
+};
