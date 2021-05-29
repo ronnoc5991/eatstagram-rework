@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Recipe } from '../../types/Recipe';
+import RecipeCard from '../organisms/RecipeCard/RecipeCard';
 import { getAndSetRecipes } from '../../utils/firebaseFunctions';
 
 export default function Recipes(): JSX.Element {
@@ -15,12 +15,14 @@ export default function Recipes(): JSX.Element {
     <div>
       {recipes.map((recipe, index) => {
         return (
-          <div key={index}>
-            {recipe.title}
-            {recipe.description}
-            {recipe.ingredients}
-            <Link to={`/recipes/${recipe.id}`}>Check it out!</Link>
-          </div>
+          <RecipeCard
+            key={index}
+            title={recipe.title}
+            description={recipe.description}
+            imageUrl={recipe.imageUrl}
+            tags={recipe.tags}
+            id={recipe.id}
+          ></RecipeCard>
         );
       })}
     </div>
